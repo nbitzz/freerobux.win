@@ -6,6 +6,8 @@ import fastify from "fastify"
 import fastifyStatic from "@fastify/static"
 
 let files = []
+let framerate = 30
+let multiplier = 3
 
 // populate with frames
 for (let i = 0; i < 603; i++) {
@@ -19,14 +21,17 @@ function mkStream() {
 	let frameNumber = 0;
 
 	let intvl = setInterval(async () => {
-		frameNumber += 1
+
+                if (frameNumber >= 603) {
+                        clearInterval(intvl);
+                        stream.push(null)
+			return
+                }
+
+		frameNumber += multiplier
 		stream.push(clearCode)
 		stream.push(Buffer.from(await files[frameNumber].arrayBuffer()))
-		if (frameNumber >= 602) {
-			clearInterval(intvl);
-			stream.push(null)
-		}
-	},1000/30)
+	},1000/framerate)
 
 	return stream
 }
@@ -48,6 +53,7 @@ app.get("/", async function(req, res) {
 	} else {
 		res.type("text/html").send(await idx.text())
 	}
+	return res
 })
 
-app.listen({ port:3000 })
+app.listen({ port:1026 })
