@@ -6,8 +6,8 @@ import fastify from "fastify"
 import fastifyStatic from "@fastify/static"
 
 let files = []
-let framerate = 30
-let multiplier = 3
+let framerate = 12
+let multiplier = 2.5
 
 // populate with frames
 for (let i = 0; i < 603; i++) {
