@@ -5,7 +5,7 @@ const clearCode = "\033[2J\033[3J\033[H"
 const files: string[] = await Promise.all(
 	Array.from(
 		{ length: 603 },
-		(_, i) => `./curlFrames/${(i + 1).toString().padStart(3, "0")}.txt`
+		(_, i) => `${__dirname}/curlFrames/${(i + 1).toString().padStart(3, "0")}.txt`
 	)
 		.map((path) => Bun.file(path))
 		.map((file) => file.text())
@@ -35,8 +35,8 @@ export default {
 		if (request.headers.get("user-agent")?.includes("curl"))
 			return new Response(stream(request.signal))
 		const path = new URL(request.url).pathname
-		if (path === "/") return new Response(Bun.file("./www/index.html"))
-		return new Response(Bun.file("./www" + path))
+		if (path === "/") return new Response(Bun.file("${__dirname}/www/index.html"))
+		return new Response(Bun.file("${__dirname}/www" + path))
 	},
 	port: process.env.PORT ?? 1026,
 } satisfies Serve
