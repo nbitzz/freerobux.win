@@ -21,7 +21,6 @@ function stream(abort: AbortSignal) {
 					controller.close()
 					return clearInterval(interval)
 				}
-				console.log("Frame", frameNumber)
 				controller.enqueue(clearCode)
 				controller.enqueue(files[Math.floor(frameNumber)])
 				frameNumber++
