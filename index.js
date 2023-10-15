@@ -30,7 +30,7 @@ function mkStream() {
 
 		frameNumber += multiplier
 		stream.push(clearCode)
-		stream.push(Buffer.from(await files[frameNumber].arrayBuffer()))
+		stream.push(Buffer.from(await files[Math.floor(frameNumber)].arrayBuffer()))
 	},1000/framerate)
 
 	return stream
