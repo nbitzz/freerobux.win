@@ -8,7 +8,7 @@ import fastifyStatic from "@fastify/static"
 let files = []
 
 // populate with frames
-for (let i = 0; i < 598; i++) {
+for (let i = 0; i < 603; i++) {
 	files.push( Bun.file(path.join(__dirname,`/curlFrames/${(i+1).toString().padStart(3, "0")}.txt`)) )
 }
 
@@ -22,7 +22,7 @@ function mkStream() {
 		frameNumber += 1
 		stream.push(clearCode)
 		stream.push(Buffer.from(await files[frameNumber].arrayBuffer()))
-		if (frameNumber >= 597) {
+		if (frameNumber >= 602) {
 			clearInterval(intvl);
 			stream.push(null)
 		}
