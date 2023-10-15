@@ -36,7 +36,7 @@ export default {
 		if (request.headers.get("user-agent")?.includes("curl"))
 			return new Response(stream(request.signal))
 		const path = new URL(request.url).pathname
-		if (path === "/") return new Response(Bun.file("${__dirname}/www/index.html"))
+		if (path === "/") return new Response(Bun.file(`${__dirname}/www/index.html`))
 		return new Response(Bun.file("${__dirname}/www" + path))
 	},
 	port: process.env.PORT ?? 1026,
