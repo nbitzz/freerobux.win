@@ -1,6 +1,7 @@
 import type { BunFile, Serve } from "bun"
 
 const framerate = 12
+const multiplier = 2.5
 const clearCode = "\033[2J\033[3J\033[H"
 const files: string[] = await Promise.all(
 	Array.from(
@@ -23,7 +24,7 @@ function stream(abort: AbortSignal) {
 				}
 				controller.enqueue(clearCode)
 				controller.enqueue(files[Math.floor(frameNumber)])
-				frameNumber++
+				frameNumber += multiplier
 			}, 1000 / framerate)
 		},
 		cancel: () => clearInterval(interval),
