@@ -37,7 +37,7 @@ export default {
 			return new Response(stream(request.signal))
 		const path = new URL(request.url).pathname
 		if (path === "/") return new Response(Bun.file(`${__dirname}/www/index.html`))
-		return new Response(Bun.file("${__dirname}/www" + path))
+		return new Response(Bun.file(`${__dirname}/www${path}`))
 	},
 	port: process.env.PORT ?? 1026,
 } satisfies Serve
