@@ -17,7 +17,10 @@ function stream(abort: AbortSignal) {
 	return new ReadableStream({
 		start(controller) {
 			interval = setInterval(() => {
-				if (frameNumber >= 603 || abort.aborted) return clearInterval(interval)
+				if (frameNumber >= 603 || abort.aborted) {
+					controller.close()
+					return clearInterval(interval)
+				}
 				console.log("Frame", frameNumber)
 				controller.enqueue(clearCode)
 				controller.enqueue(files[Math.floor(frameNumber)])
